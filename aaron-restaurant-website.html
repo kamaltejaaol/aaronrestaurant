@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Restaurant</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      scroll-behavior: smooth;
+      color: #fff;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: transparent;
+      padding: 10px 20px;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    header img {
+      width: 120px;
+    }
+
+    header h1 {
+      margin-top: 10px;
+      font-size: 28px;
+      color: #ffe0b3;
+    }
+
+    .gif-banner {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffe0b3;
+    }
+
+    .horizontal-scroll-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 20px;
+      white-space: nowrap;
+      animation: scroll-left 30s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .scroll-img {
+      width: 250px;
+      border-radius: 8px;
+      flex: 0 0 auto;
+    }
+
+    /* ✅ Centering the logo */
+    header {
+    text-align: center;
+    padding-top: 80px;
+    }
+
+    /* ✅ Increase Logo Size */
+    header img {
+    width: 300px; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+    }
+
+
+    /* ✅ Menu Gallery Fix - 4 Items Per Row */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(220px, 1fr)); /* 4 items per row */
+        gap: 20px; /* Keeps columns spaced */
+        justify-content: center; /* Center the grid */
+        align-items: center;
+        text-align: center;
+        margin: 0 auto; /* Ensure it's centered */
+        max-width: 80%;
+        }
+
+        .item-box {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 250px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        margin-bottom: 30px; /* ✅ This adds space between rows */
+        }
+
+
+    .item-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .item-box:hover {
+      transform: scale(1.05);
+    }
+
+    .item-text {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* ✅ Fix Centering for Menu Card & Offers */
+    .card-grid, .offers {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .testimonial {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-left: 5px solid #ffe0b3;
+      padding: 20px;
+      width: 280px;
+      height: 160px;
+      border-radius: 8px;
+      font-style: italic;
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+   /* ✅ Contact Us - Horizontal Alignment */
+        .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
+        font-size: 18px;
+        }
+
+        .contact-info i {
+        margin-right: 8px;
+        font-size: 22px;
+        }
+
+        .contact-info a {
+        color: #ffe0b3;
+        text-decoration: none;
+        font-weight: bold;
+        }
+
+     /* ✅ Modal Styles for Menu Card Pop-up */
+     .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ✅ Fix Modal Image Centering */
+    .modal-content {
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    /* ✅ Fix Close Button */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ffaaaa;
+    }
+
+ /* ✅ Special Events Section - Title */
+.special-events-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffe0b3;
+  margin-bottom: 20px;
+}
+
+/* ✅ Special Events - Split Layout */
+.special-events {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+  gap: 20px;
+}
+
+/* ✅ Left Side - Image */
+.special-events .left {
+  width: 50%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  transition: background-image 1s ease-in-out;
+}
+
+/* ✅ Right Side - Text Formatting */
+.special-events .right {
+  width: 50%;
+  text-align: center;
+}
+
+/* ✅ Event Title (Bold & Non-Italic) */
+.event-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* ✅ Event Description (Pacifico Font) */
+.event-description {
+  font-size: 22px;
+  font-family: 'Pacifico', cursive;
+  color: #ffe0b3;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#special-events">Special Events</a>
+    <!-- <a href="#specialities">Specialities</a> -->
+    <a href="#menu-gallery">Menu Gallery</a>
+    <a href="#menu-card">Menu Card</a>
+    <a href="#offers">Offers</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <header id="home">
+    
+    <header id="home">
+        <h1>Welcome To</h1>
+        <img src="logo.png" alt="Restaurant Logo" width="1000"> <!-- Increase width -->
+      </header>
+
+  <img src="banner.gif" class="gif-banner" alt="Restaurant Banner GIF">
+
+  <!-- <section id="specialities">
+    <h2>Our Specialities</h2>
+    <div class="horizontal-scroll-container">
+      <div class="horizontal-scroll">
+        <img src="burger.jpg" class="scroll-img" alt="Burger">
+        <img src="pizza.jpg" class="scroll-img" alt="Pizza">
+        <img src="biryani.jpg" class="scroll-img" alt="Biryani">
+        <img src="juices.jpg" class="scroll-img" alt="Juices">
+        <img src="burger.jpg" class="scroll-img" alt="Burger">
+        <img src="pizza.jpg" class="scroll-img" alt="Pizza">
+        <img src="biryani.jpg" class="scroll-img" alt="Biryani">
+        <img src="juices.jpg" class="scroll-img" alt="Juices">
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <section class="split-section">
+
+    <div class="split-left" id="birthdayImage"></div>
+    <div class="split-right">
+        <h2>Birthday Celebrations</h2>
+      <p id="birthdayText">Enjoy your memorable and cherishable moments at Aaron Restaurant with our great offers for special occasions.</p>
+    </div>
+  </section> -->
+  
+  <h2 class="special-events-title">Special Events</h2> <!-- ✅ Section Title -->
+
+  <section id="special-events" class="special-events">
+    <div class="left" id="eventImage"></div>
+    <div class="right">
+      <p class="event-title" id="eventTitle"></p>
+      <p class="event-description" id="eventText"></p>
+    </div>
+  </section>
+  
+  
+
+  <section id="menu-card">
+    <h2>Menu Card</h2>
+    <div class="card-grid">
+      <div class="item-box">
+        <img src="menu1.jpg" alt="Menu 1" onclick="openModal('menu1.jpg')">
+      </div>
+      <div class="item-box">
+        <img src="menu2.jpg" alt="Menu 2" onclick="openModal('menu2.jpg')">
+      </div>
+    </div>
+  </section>
+
+  <section id="menu-gallery">
+    <h2>Menu Gallery</h2>
+    <div class="gallery">
+      <div class="item-box">
+        <img src="burger1.jpg" alt="Cheese Burger">
+        <div class="item-text">Cheese Burger</div>
+      </div>
+      <div class="item-box">
+        <img src="pizza1.jpg" alt="Veg Loaded Pizza">
+        <div class="item-text">Veg Loaded Pizza</div>
+      </div>
+      <div class="item-box">
+        <img src="juice1.jpg" alt="Fresh Orange Juice">
+        <div class="item-text">Fresh Orange Juice</div>
+      </div>
+      <div class="item-box">
+        <img src="biryani1.jpg" alt="Chicken Biryani">
+        <div class="item-text">Chicken Biryani</div>
+      </div>
+    </div>
+    <div class="gallery">
+        <div class="item-box">
+          <img src="burger1.jpg" alt="Cheese Burger">
+          <div class="item-text">Cheese Burger</div>
+        </div>
+        <div class="item-box">
+          <img src="pizza1.jpg" alt="Veg Loaded Pizza">
+          <div class="item-text">Veg Loaded Pizza</div>
+        </div>
+        <div class="item-box">
+          <img src="juice1.jpg" alt="Fresh Orange Juice">
+          <div class="item-text">Fresh Orange Juice</div>
+        </div>
+        <div class="item-box">
+          <img src="biryani1.jpg" alt="Chicken Biryani">
+          <div class="item-text">Chicken Biryani</div>
+        </div>
+      </div>
+  </section>
+
+
+
+  <section id="offers">
+    <h2>Today's Offers</h2>
+    <div class="offers">
+      <div class="item-box">
+        <img src="combo1.jpg" alt="Burger Combo">
+        <div class="item-text">Burger + Fries @ ₹149</div>
+      </div>
+      <div class="item-box">
+        <img src="combo2.jpg" alt="Pizza Combo">
+        <div class="item-text">Medium Pizza + Coke @ ₹199</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonials">
+      <div class="testimonial">"The cheese burger here is the best I've ever had – juicy and full of flavor!" – @Arun</div>
+      <div class="testimonial">"Loved the crispy thin crust pizza and the vibrant toppings. Five stars!" – @Priya</div>
+      <div class="testimonial">"Chicken biryani was perfectly spiced and tender – reminded me of home." – @Kumar</div>
+      <div class="testimonial">"Tried their combo offer – great value and taste! Will visit again." – @Meena</div>
+      <div class="testimonial">"Paneer pizza was amazing! My kids loved it." – @Ravi</div>
+      <div class="testimonial">"The lime-mint juice is a refreshing hit during summers." – @Lakshmi</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <div>
+        <i>📍</i> 
+        <a href="https://www.google.com/maps/place/Mrs+vegetables/@13.0353052,80.2290626,3a,75y,31.47h,77.37t/data=!3m7!1e1!3m5!1sLfshs-dWLzaFGee5soD0eQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D12.629132207541048%26panoid%3DLfshs-dWLzaFGee5soD0eQ%26yaw%3D31.469326716169356!7i13312!8i6656!4m16!1m9!3m8!1s0x3a5266ffd82bfddd:0xe293ab3dafcb6c50!2s28,+Madley+Rd,+T+Nagar,+T.+Nagar,+Chennai,+Tamil+Nadu+600017,+India!3b1!8m2!3d13.0352006!4d80.2300604!10e5!16s%2Fg%2F11rd816frm!3m5!1s0x3a526729b2c48a6b:0xc72d3d5d966cc01!8m2!3d13.035229!4d80.2289891!16s%2Fg%2F11hsfcqj4_?entry=ttu&g_ep=EgoyMDI1MDMxOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+            28 Madley Rd, T.Nagar, Chennai, Tamil Nadu
+        </a>
+      </div>
+      <div><i>📞</i> <a href="tel:+919876543210">+91 98765 43210</a></div>
+      <div><i>✉️</i> <a href="mailto:info@yourrestaurant.com">info@yourrestaurant.com</a></div>
+    </div>
+  </section>
+  
+  
+
+
+   <!-- ✅ Modal for Menu Card -->
+   <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" src="" alt="Full Menu">
+  </div>
+
+  <script>
+    function openModal(imageSrc) {
+      document.getElementById("imageModal").style.display = "flex";
+      document.getElementById("modalImage").src = imageSrc;
+    }
+
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("imageModal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+    </script>
+
+
+<script>
+  // ✅ Define Events with Separate Title and Description
+  const events = [
+    { 
+      images: ["birthday1.jpg", "birthday2.jpg"],
+      title: "Birthday Party",
+      text: "Enjoy your memorable and cherishable moments at Aaron Restaurant with our great offers for special occasions."
+    },
+    { 
+      images: ["gettogether1.jpg", "gettogether2.jpg"],
+      title: "Get Together",
+      text: "Celebrate good times with friends at Aaron Restaurant, featuring great offers for special occasions."
+    }
+    // ✅ Future events can be added here
+  ];
+
+  let eventIndex = 0;
+  let imageIndex = 0;
+
+  function updateEvent() {
+    const currentEvent = events[eventIndex];
+    document.getElementById("eventImage").style.backgroundImage = `url('${currentEvent.images[imageIndex]}')`;
+    document.getElementById("eventTitle").innerText = currentEvent.title;
+    document.getElementById("eventText").innerText = currentEvent.text;
+
+    imageIndex++;
+
+    // If all images for this event are displayed, switch to the next event
+    if (imageIndex >= currentEvent.images.length) {
+      imageIndex = 0;
+      eventIndex = (eventIndex + 1) % events.length;
+    }
+  }
+
+  // ✅ Run the function every 5 seconds
+  setInterval(updateEvent, 5000);
+  updateEvent(); // Initial call
+</script>
+
+  
+  
+  
+</body>
+</html>
